@@ -1,0 +1,49 @@
+modLoader="javafml" #mandatory
+	
+loaderVersion="[38,)" #mandatory 
+
+license="All rights reserved"
+
+[[mods]] #mandatory
+	
+modId="nero_economy" #mandatory
+
+version="${file.jarVersion}" #mandatory
+
+displayName="Nero Economy" #mandatory
+
+logoFile="" #optional
+
+credits="Thanks for downloading my Mod" #optional
+	
+authors="Luis" #optional
+
+description='''
+Nero Economy adds an Item Economy
+Have a lot of fun when playing
+Nero Development Team
+'''
+	
+[[dependencies.nero_economy]] #optional
+	
+    modId="forge" #mandatory
+    
+    mandatory=true #mandatory
+    
+    versionRange="[38,)" #mandatory
+    
+    ordering="NONE"
+    
+    side="BOTH"
+    
+[[dependencies.nero_economy]]
+		
+    modId="minecraft"
+    
+    mandatory=true
+
+    versionRange="[1.18,1.19)"
+    
+    ordering="NONE"
+    
+    side="BOTH"
