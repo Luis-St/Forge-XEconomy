@@ -1,0 +1,19 @@
+package net.luis.xeconomy.network;
+
+import net.luis.xeconomy.XEconomy;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.simple.SimpleChannel;
+
+public class NetworkHandler {
+	
+	private static final String version = "1";
+	@SuppressWarnings("unused")
+	private static int id = 0;
+	public static SimpleChannel simpleChannel;
+
+	public static void init() {
+		NetworkRegistry.newSimpleChannel(new ResourceLocation(XEconomy.MOD_ID, "simple_chnanel"), () -> version, version::equals, version::equals);
+	}
+
+}
