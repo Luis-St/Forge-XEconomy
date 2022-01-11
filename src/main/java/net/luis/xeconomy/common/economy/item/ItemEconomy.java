@@ -1,11 +1,7 @@
-package net.luis.xeconomy.common.economy;
-
-import java.util.Random;
+package net.luis.xeconomy.common.economy.item;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
-import net.minecraft.world.item.Item;
 
 public class ItemEconomy {
 	
@@ -56,46 +52,47 @@ public class ItemEconomy {
 		return this.minPrice;
 	}
 	
+	public void setMinPrice(int minPrice) {
+		this.minPrice = minPrice;
+	}
+	
 	public int getMaxPrice() {
 		return this.maxPrice;
+	}
+	
+	public void setMaxPrice(int maxPrice) {
+		this.maxPrice = maxPrice;
 	}
 	
 	public int getCount() {
 		return this.count;
 	}
+	
+	public void setCount(int count) {
+		this.count = count;
+	}
 
-	/* -- Edit: use extra sell and buy -- */
-	
-	// TODO: test and modify
-	protected int calculatePrice(Item item, double playerInflation) {
-		int priceAdditional = (int) Math.round(-(Math.pow(this.count, 3) / Math.pow(2, 15) * 0.003));
-		int price = (int) Math.round((this.price * (1.0 + this.inflation)) * (1.0 + playerInflation));
-		return Math.max(Math.min(price + priceAdditional, this.maxPrice), this.minPrice);
-	}
-	
-	public int getPrice(ItemStorage itemStorage, double playerInflation) {
-		return this.calculatePrice(itemStorage.item(), playerInflation) * itemStorage.count();
-	}
-	
-	/* -- Edit: use extra sell and buy -- */
 	
 	public double getInflation() {
 		return this.inflation;
 	}
 	
-	// TODO: log info
-	public void update(Item item, double inflation) {
-		Random rng = new Random(System.currentTimeMillis());
-		if (inflation > this.inflation * 1.05) {
-			double d = (rng.nextInt(5) + 1) / 100;
-			this.inflation *= 1.0 + d;
-		} else if (this.inflation * 0.95 > inflation) {
-			double d = (rng.nextInt(5) + 5) / 100;
-			this.inflation *= 0.9 + d;
-		} else {
-			this.inflation = inflation;
+	public void setInflation(double inflation) {
+		this.inflation = inflation;
+	}
+	
+	// TODO: add getPrice method for buy and sell
+	
+	@Override
+	public boolean equals(Object object) {
+		if (object == this) {
+			return true;
+		} else if (object instanceof ItemEconomy itemEconomy) {
+			if (this.price == itemEconomy.price && this.minPrice == itemEconomy.minPrice && this.maxPrice == itemEconomy.maxPrice) {
+				return this.inflation == itemEconomy.inflation;
+			}
 		}
-		
+		return false;
 	}
 	
 	@Override

@@ -1,11 +1,7 @@
-package net.luis.xeconomy.common.economy.player.bank;
+package net.luis.xeconomy.common.economy.bank;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.server.level.ServerPlayer;
 
 public class BankCredit {
 	
@@ -52,29 +48,39 @@ public class BankCredit {
 		return this.interest;
 	}
 	
+	public int getMoneyForRepaid() {
+		return (int) Math.round(this.money * (1.0 + this.interest));
+	}
+	
 	public int getRepaidMoney() {
 		return this.repaidMoney;
 	}
 	
-	public boolean isRepaid() {
-		return this.repaidMoney >= (this.money * (1.0 + this.interest));
+	public void setRepaidMoney(int repaidMoney) {
+		this.repaidMoney = repaidMoney;
 	}
 	
-	public boolean canRemove(ServerPlayer player) {
+	public boolean isRepaid() {
+		return this.repaidMoney >= this.getMoneyForRepaid();
+	}
+	
+	public int getMissingRepaidMoney() {
 		if (this.isRepaid()) {
-			player.sendMessage(new TextComponent("[Bank Credit]").withStyle(ChatFormatting.GREEN).append(":")
-					.append(new TextComponent("Remove Bank Credi with ID " + this.id + ", since it's repaid").withStyle(ChatFormatting.GRAY)), player.getUUID()); // TODO: use option to disable Feedback 
+			return 0;
+		}
+		return this.getMoneyForRepaid() - this.repaidMoney;
+	}
+	
+	@Override
+	public boolean equals(Object object) {
+		if (object == this) {
 			return true;
+		} else if (object instanceof BankCredit bankCredit) {
+			if (this.id == bankCredit.id && this.money == bankCredit.money && this.interest == bankCredit.interest) {
+				return this.repaidMoney == bankCredit.repaidMoney;
+			}
 		}
 		return false;
-	}
-	
-	public void defaultUpdate() {
-		this.repaidMoney += (this.money * (1.0 + this.interest)) * 0.01;
-	}
-	
-	public void update(ServerPlayer player, int repaidMoney) {
-		this.repaidMoney += repaidMoney;
 	}
 	
 	@Override
