@@ -10,7 +10,7 @@ import org.apache.commons.compress.utils.Lists;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import net.luis.xeconomy.common.economy.EconomyPlayer;
+import net.luis.xeconomy.common.economy.player.EconomyPlayer;
 
 public class PlayerBankStorage {
 	

@@ -3,8 +3,6 @@ package net.luis.xeconomy.common.economy.player;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
-import net.luis.xeconomy.common.economy.EconomyPlayer;
-
 public class PlayerEconomyStorage {
 	
 	public static final Codec<PlayerEconomyStorage> CODEC = RecordCodecBuilder.create((instance) -> {
