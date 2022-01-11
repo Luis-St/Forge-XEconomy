@@ -24,6 +24,7 @@ public class JsonHelper {
 		}
 		BufferedWriter writer = Files.newBufferedWriter(path);
 		writer.write(element);
+		writer.flush();
 		writer.close();
 	}
 	

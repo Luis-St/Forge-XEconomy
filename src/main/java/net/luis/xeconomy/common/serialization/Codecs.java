@@ -5,7 +5,7 @@ import java.util.Map;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 
-import net.luis.xeconomy.common.economy.ItemEconomy;
+import net.luis.xeconomy.common.economy.item.ItemEconomy;
 import net.luis.xeconomy.common.economy.player.PlayerEconomyStorage;
 import net.minecraft.core.Registry;
 import net.minecraft.world.item.Item;
