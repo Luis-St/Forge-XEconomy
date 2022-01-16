@@ -1,4 +1,4 @@
-package net.luis.xeconomy.common.economy;
+package net.luis.xeconomy.common.economy.player;
 
 import java.util.UUID;
 
@@ -24,6 +24,10 @@ public class EconomyPlayer {
 	
 	protected final String name;
 	protected final UUID uuid;
+	
+	public EconomyPlayer(ServerPlayer player) {
+		this(player.getName().getString(), player.getUUID());
+	}
 	
 	public EconomyPlayer(String name, UUID uuid) {
 		this.name = name;
@@ -61,10 +65,7 @@ public class EconomyPlayer {
 	
 	@Override
 	public String toString() {
-		StringBuilder builder = new StringBuilder("EconomyPlayer:{");
-		builder.append("name=").append(this.name).append(", ");
-		builder.append("uuid=").append(this.uuid).append("}");
-		return builder.toString();
+		return this.name + " : " + this.uuid.toString();
 	}
 	
 }

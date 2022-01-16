@@ -31,6 +31,10 @@ public class PlayerBankStorage {
 	protected double interest = 0.0;
 	protected final List<BankCredit> bankCredits;
 	
+	public PlayerBankStorage(EconomyPlayer economyPlayer, int money) {
+		this(economyPlayer, money, 0.0);
+	}
+	
 	public PlayerBankStorage(EconomyPlayer economyPlayer, int money, double interest) {
 		this(economyPlayer, money, interest, Lists.newArrayList());
 	}

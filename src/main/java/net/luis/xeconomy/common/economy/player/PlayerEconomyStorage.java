@@ -19,6 +19,10 @@ public class PlayerEconomyStorage {
 	protected int money = 0;
 	protected double inflation = 0.0;
 	
+	public PlayerEconomyStorage(EconomyPlayer economyPlayer, int money) {
+		this(economyPlayer, money, 0.0);
+	}
+	
 	protected PlayerEconomyStorage(EconomyPlayer economyPlayer, int money, double inflation) {
 		this.economyPlayer = economyPlayer;
 		this.money = money;
