@@ -4,60 +4,65 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.UUID;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-import net.luis.xeconomy.common.economy.ItemEconomy;
-import net.luis.xeconomy.common.economy.ItemStorage;
+import net.luis.xeconomy.common.economy.bank.BankCredit;
+import net.luis.xeconomy.common.economy.bank.PlayerBankStorage;
+import net.luis.xeconomy.common.economy.item.EconomyItemStack;
+import net.luis.xeconomy.common.economy.item.ItemEconomy;
+import net.luis.xeconomy.common.economy.player.EconomyPlayer;
 import net.luis.xeconomy.common.economy.player.PlayerEconomyStorage;
-import net.luis.xeconomy.common.economy.player.bank.BankCredit;
-import net.luis.xeconomy.common.economy.player.bank.BankPlayerStorage;
-import net.luis.xeconomy.common.economy.update.BankStorageUpdate;
-import net.luis.xeconomy.common.economy.update.PlayerStorageUpdate;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.Item;
 
 public interface IEconomyCapability {
 	
-	void init();
+	boolean isPlayerRegistered(ServerPlayer player);
 	
 	void registerPlayer(ServerPlayer player);
 	
 	List<ServerPlayer> getPlayers();
 	
+	List<EconomyPlayer> getEconomyPlayers();
+	
 	@Nullable
-	ServerPlayer getPlayer(UUID uuid);
+	EconomyPlayer getPlayer(UUID uuid);
+	
+	@Nullable
+	EconomyPlayer getPlayer(ServerPlayer player);
 	
 	List<ItemEconomy> getEconomies();
 	
+	@Nonnull
 	ItemEconomy getEconomy(Item item);
 	
-	boolean canBuy(ServerPlayer player, ItemStorage itemStorage, boolean includeBank);
+	boolean canBuy(EconomyPlayer player, EconomyItemStack economyStack, boolean includeBank);
 	
-	void buy(ServerPlayer player, ItemStorage itemStorage);
+	void buy(EconomyPlayer player, EconomyItemStack economyStack);
 	
-	boolean canSell(ServerPlayer player, ItemStorage itemStorage);
+	boolean canSell(EconomyPlayer player, EconomyItemStack economyStack);
 	
-	void sell(ServerPlayer player, ItemStorage itemStorage);
+	void sell(EconomyPlayer player, EconomyItemStack economyStack);
 	
-	int getBuyPrice(ServerPlayer player, ItemStorage itemStorage);
+	int getBuyPrice(EconomyPlayer player, EconomyItemStack economyStack);
 	
-	int getSellPrice(ServerPlayer player, ItemStorage itemStorage);
+	int getSellPrice(EconomyPlayer player, EconomyItemStack economyStack);
 	
 	List<PlayerEconomyStorage> getEconomyStorages();
 	
-	PlayerEconomyStorage getEconomyStorage(ServerPlayer player);
+	@Nullable
+	PlayerEconomyStorage getEconomyStorage(EconomyPlayer player);
 	
-	List<BankPlayerStorage> getBankStorages();
+	List<PlayerBankStorage> getBankStorages();
 	
-	BankPlayerStorage getBankStorage(ServerPlayer player);
+	@Nullable
+	PlayerBankStorage getBankStorage(EconomyPlayer player);
 	
-	boolean hasMoney(ServerPlayer player, int money, boolean includeBank);
+	boolean hasMoney(EconomyPlayer player, int money, boolean includeBank);
 	
-	List<BankCredit> getBankCredits(ServerPlayer player);
-	
-	void updatePlayer(ServerPlayer player, PlayerStorageUpdate storageUpdate, BankStorageUpdate bankUpdate);
-	
-	void updateItem(Item item, double inflation);
+	@Nonnull
+	List<BankCredit> getBankCredits(EconomyPlayer player);
 	
 	void saveAsJson(Path path);
 	

@@ -3,9 +3,6 @@ package net.luis.xeconomy.common.capability.provider;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
 import net.luis.xeconomy.XEconomy;
 import net.luis.xeconomy.common.capability.handler.EconomyCapabilityHandler;
 import net.luis.xeconomy.common.capability.interfaces.IEconomyCapability;
@@ -17,8 +14,6 @@ import net.minecraftforge.common.capabilities.ICapabilitySerializable;
 import net.minecraftforge.common.util.LazyOptional;
 
 public class EconomyCapabilityProvider implements ICapabilitySerializable<CompoundTag> {
-	
-	protected static final Gson GSON = (new GsonBuilder()).setPrettyPrinting().create();
 	
 	protected EconomyCapabilityHandler handler = new EconomyCapabilityHandler();
 	protected final LazyOptional<IEconomyCapability> optional = LazyOptional.of(() -> this.handler);

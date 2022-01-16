@@ -5,16 +5,10 @@ import java.util.Map;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 
-import net.luis.xeconomy.common.economy.item.ItemEconomy;
 import net.luis.xeconomy.common.economy.player.PlayerEconomyStorage;
-import net.minecraft.core.Registry;
-import net.minecraft.world.item.Item;
 
-@SuppressWarnings("deprecation")
 public class Codecs {
 	
-	public static final Codec<Item> ITEM = Registry.ITEM.byNameCodec();
-	public static final Codec<Map<Item, ItemEconomy>> ECONOMIES = Codec.unboundedMap(Codecs.ITEM, ItemEconomy.CODEC);
 	public static final Codec<java.util.UUID> UUID = Codec.STRING.comapFlatMap(Codecs::readUUID, java.util.UUID::toString);
 	public static final Codec<Map<java.util.UUID, PlayerEconomyStorage>> ECONOMY_STORAGES = Codec.unboundedMap(Codecs.UUID, PlayerEconomyStorage.CODEC);
 	
