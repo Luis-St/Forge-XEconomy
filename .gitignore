@@ -21,5 +21,11 @@ build
 eclipse
 run
 
+# Files from Forge MDK
+changelog.txt
+CREDITS.txt
+LICENSE.txt
+.launch
+
 # Project Files
 setup.bat
