@@ -1,9 +1,6 @@
 package net.luis.xeconomy.event.entity;
 
 import net.luis.xeconomy.XEconomy;
-import net.luis.xeconomy.init.capability.ModCapabilities;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -13,13 +10,13 @@ public class OnEntityJoinWorldEvent {
 
 	@SubscribeEvent
 	public static void enityJoinWorld(PlayerLoggedInEvent event) {
-		if (event.getPlayer() instanceof ServerPlayer player) {
-			if (player.getCommandSenderWorld() instanceof ServerLevel level) {
-				level.getCapability(ModCapabilities.ECONOMY, null).ifPresent(handler -> {
-					handler.registerPlayer(player);
-				});
-			}
-		}
+//		if (event.getPlayer() instanceof ServerPlayer player) {
+//			if (player.getCommandSenderWorld() instanceof ServerLevel level) {
+//				level.getCapability(ModCapabilities.ECONOMY, null).ifPresent(handler -> {
+//					handler.registerPlayer(player);
+//				});
+//			}
+//		}
 	}
 
 }

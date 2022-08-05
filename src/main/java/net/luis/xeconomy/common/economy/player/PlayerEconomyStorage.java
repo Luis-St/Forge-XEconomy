@@ -41,6 +41,16 @@ public class PlayerEconomyStorage {
 		this.money = money;
 	}
 	
+	public int money(int money) {
+		this.money += money;
+		if (0 > this.money) {
+			int i = this.money * -1;
+			this.money = 0;
+			return i;
+		}
+		return 0;
+	}
+	
 	public double getInflation() {
 		return this.inflation;
 	}

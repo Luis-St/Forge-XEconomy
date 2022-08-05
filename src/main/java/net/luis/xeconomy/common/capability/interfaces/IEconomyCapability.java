@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 import net.luis.xeconomy.common.economy.bank.BankCredit;
 import net.luis.xeconomy.common.economy.bank.PlayerBankStorage;
@@ -26,37 +25,37 @@ public interface IEconomyCapability {
 	
 	List<EconomyPlayer> getEconomyPlayers();
 	
-	@Nullable
-	EconomyPlayer getPlayer(UUID uuid);
-	
-	@Nullable
+	@Nonnull
 	EconomyPlayer getPlayer(ServerPlayer player);
+	
+	@Nonnull
+	EconomyPlayer getPlayer(UUID uuid);
 	
 	List<ItemEconomy> getEconomies();
 	
 	@Nonnull
 	ItemEconomy getEconomy(Item item);
 	
-	boolean canBuy(EconomyPlayer player, EconomyItemStack economyStack, boolean includeBank);
-	
-	void buy(EconomyPlayer player, EconomyItemStack economyStack);
-	
-	boolean canSell(EconomyPlayer player, EconomyItemStack economyStack);
-	
-	void sell(EconomyPlayer player, EconomyItemStack economyStack);
-	
 	int getBuyPrice(EconomyPlayer player, EconomyItemStack economyStack);
 	
 	int getSellPrice(EconomyPlayer player, EconomyItemStack economyStack);
 	
+	boolean canBuy(EconomyPlayer player, EconomyItemStack economyStack, boolean includeBank);
+	
+	void buy(EconomyPlayer player, EconomyItemStack economyStack, boolean includeBank);
+	
+	boolean canSell(EconomyPlayer player, EconomyItemStack economyStack);
+	
+	void sell(EconomyPlayer player, EconomyItemStack economyStack, boolean sellPossible);
+	
 	List<PlayerEconomyStorage> getEconomyStorages();
 	
-	@Nullable
+	@Nonnull
 	PlayerEconomyStorage getEconomyStorage(EconomyPlayer player);
 	
 	List<PlayerBankStorage> getBankStorages();
 	
-	@Nullable
+	@Nonnull
 	PlayerBankStorage getBankStorage(EconomyPlayer player);
 	
 	boolean hasMoney(EconomyPlayer player, int money, boolean includeBank);

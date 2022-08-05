@@ -58,6 +58,16 @@ public class PlayerBankStorage {
 		this.money = money;
 	}
 	
+	public int money(int money) {
+		this.money += money;
+		if (0 > this.money) {
+			int i = this.money * -1;
+			this.money = 0;
+			return i;
+		}
+		return 0;
+	}
+	
 	public boolean hasMoney() {
 		return this.money > 0;
 	}
